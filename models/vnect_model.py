@@ -178,9 +178,9 @@ if __name__ == '__main__':
     with tf.Session() as sess:
         saver = tf.train.Saver()
         tf_writer = tf.summary.FileWriter(logdir='./', graph=sess.graph)
-
+        model.load_weights(sess, model_file) 
+        save_path = saver.save(sess, "./models/weights/vnect_tf")
         sess.run(tf.global_variables_initializer())
         print(model.res5b_branch2c_new)
         print(model.heapmap, model.x_heatmap, model.y_heatmap, model.z_heatmap)
-
 

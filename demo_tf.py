@@ -1,6 +1,8 @@
 import argparse
-import time
-
+import ipdb;pdb=ipdb.set_trace 
+import time  
+import matplotlib
+matplotlib.use('Agg')
 import cv2
 import numpy as np
 import tensorflow as tf
@@ -13,7 +15,7 @@ import utils.utils as utils
 parser = argparse.ArgumentParser()
 parser.add_argument('--demo_type', default='image')
 parser.add_argument('--device', default='cpu')
-parser.add_argument('--model_file', default='models/weights/vnect_tf')
+parser.add_argument('--model_file', default='vnect.pkl')
 parser.add_argument('--test_img', default='test_imgs/yuniko.jpg')
 parser.add_argument('--input_size', default=368)
 parser.add_argument('--num_of_joints', default=21)
@@ -143,7 +145,10 @@ def demo_single_image():
             # Display 2d results
             concat_img = np.concatenate((cam_img[:, :, ::-1], joint_map), axis=1)
             ax2.imshow(concat_img.astype(np.uint8))
-        plt.pause(100000)
+            #### save
+            print('save 3d img')
+            cv2.imwrite('output/saved_3d.jpg', concat_img.astype(np.uint8))
+        #  plt.pause(100000)
         plt.show(block=False)
 
     elif args.plot_2d:

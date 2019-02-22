@@ -1,7 +1,7 @@
 import cv2
 import numpy as np
 import math
-from OpenGL.GL import *
+#  from OpenGL.GL import *
 
 
 
@@ -104,6 +104,9 @@ def draw_limbs_2d(img, joints_2d, limb_parents):
                                    int(deg),
                                    0, 360, 1)
         cv2.fillConvexPoly(img, polygon, color=(0,255,0))
+    #### save
+    print('save 2d img')
+    cv2.imwrite('output/saved_2d.jpg', img)
     return
 
 def draw_limbs_3d(joints_3d, limb_parents, ax):
@@ -136,16 +139,4 @@ def draw_limbs_3d_gl(joints_3d, limb_parents):
         glVertex3fv((joints_3d[i, 0], joints_3d[i, 1], joints_3d[i, 2]))
         glVertex3fv((joints_3d[limb_parents[i], 0], joints_3d[limb_parents[i], 1], joints_3d[limb_parents[i], 2]))
     glEnd()
-
-
-
-
-
-
-
-
-
-
-
-
 
